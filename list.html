@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+	<link rel="stylesheet" href="">
+  <link rel="stylesheet" href="Content/jquery.mCustomScrollbar.min.css">
+  <link rel="stylesheet" href="Content/default-layout.css">
+	<style>
+  
+  .index-background:before {
+        border: none
+      }
+      /* list */
+      .search-top {
+        top: -20px;
+        bottom: auto;
+        transform: scale(.6)
+      }
+      .music-panel {
+        border-top: 1px solid rgba(255,255,255,.3);
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        -webkit-flex: 1;
+          flex: 1;
+      }
+      .music-detail {
+        width: 100%;
+        max-width: 320px;
+        padding: 15px;
+        height: 100vh;
+        max-height: 100vh;
+        overflow-y: scroll;
+      }
+      .panel-fixed .music-detail {
+        top: 0;
+        position: fixed;
+        z-index: 1;
+      }
+      .panel-fixed .music-list {
+        margin-left: 320px;
+      }
+      .music-list {
+        padding: 15px;
+         -webkit-flex: 1;
+          flex: 1;
+      }
+      .music-item {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        border-left: 2px solid rgba(255,110,64,.7);
+        padding: 10px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        background-color: rgba(70,70,70,.5);
+        box-shadow: 0 0 10px rgba(0,0,0,.7);
+        -webkit-transition-property: transform, background-color;
+        -o-transition-property: transform, background-color;
+        transition-property: transform, background-color;
+        transition-duration: .3s;
+      }
+      .music-item:hover {
+        border-color: rgba(255,110,64,.9);
+        background-color: rgba(70,70,70,.7);
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(0,0,0,.1);
+      }
+      .music-item:hover + article {
+        transform: scale(1.01);
+        box-shadow: 0 0 10px rgba(0,0,0,.7);
+      }
+      .music-img {
+        width: 100px;
+        font-size: .75em;
+        line-height: 1.8em;
+      }
+      .music-info {
+        margin-left: 20px;
+        position: relative;
+        -webkit-flex: 1;
+          flex: 1;
+      }
+      .music-info a{
+        color: rgba(255,110,64,1);
+      }
+      .music-info a:hover {
+        color: rgba(255,110,64,.6);
+      }
+      .text-color--white {
+        color: rgba(255,255,255,.7);
+      }
+      .info-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      .pull-right {
+        float: right;
+      }
+      .music-artister,
+      .music-cover,
+      .music-history {
+        height: 3em;
+        margin-bottom: 20px;
+        overflow: hidden;
+        border-top: 2px solid rgba(255,110,64,.6);
+      }
+      .music-history {
+        margin-bottom: 40px;
+      }
+      .music-detail h6 {
+        position: relative;
+        line-height: 3em;
+        cursor: pointer;
+      }
+      .music-detail h6:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 10px;
+        height: 1px;
+        background-color: rgba(255,255,255,.4);
+      }
+      .music-detail .slide {
+        height: auto;
+      }
+      [role*='detail-slider'] i {
+        background-color: rgba(255,110,64,.6);
+      }
+      @media screen and (max-width: 544px) { 
+        .music-detail {
+          position: fixed;
+          display: none;
+          top: 0;
+          left: 0;
+          z-index: 99;
+          max-width: 100%;
+          padding: 0;
+          background-color: black;
+        } 
+
+        .music-detail.pop-view {
+          display: block;
+        }
+        .music-basicinfo,
+        .music-artister,
+        .music-cover,
+        .music-history {
+          margin: 0 15px
+        }
+        .music-list {
+          margin-left: 0 !important;
+        } 
+        .music-back i{
+          position: fixed;
+          right: 0;
+          top: 0;
+          padding: 10px;
+          font-size: 2em;
+          color: rgba(0,0,0,.7);
+          background-color: rgb(255,110,64);
+          cursor: pointer;
+        }
+        .music-item {
+          display: block;
+          height: auto;
+        }
+        .music-img{
+          width: 100%;
+          margin-bottom: 15px;
+        }
+        .music-info {
+          width: 100%;
+          margin-left: 0;
+        }
+        .info-footer {
+          position: static;
+        }
+      }
+	</style>
+</head>
+<body>
+<div class="index-background"></div>
+<div class="container-fluid">
+
+  <header class="header">
+    <h1 class="logo">
+      <img src="Images/logo-01.png" height="50" alt="">
+    </h1>
+    <div class="mob-menu hidden-md-up" role="open-menu">
+      <i class="material-icons">tune</i>
+    </div>
+  </header>
+  
+  <section >
+  	<div class="container">
+      <!-- search -->
+      <div class="search-area search-top">
+        <form action="#">
+          <div class="search-keyword">
+            
+            <i class="material-icons">search</i>
+            <input type="text" placeholder="尋找你的黑膠 soulmate">
+          </div>
+          <div class="search-type">
+            <ul class="search-type--list">
+              <li class="search-type--item active">唱片名稱</li>
+              <li class="search-type--item">名人</li>
+              <li class="search-type--item">音樂類型</li>
+              <li class="search-type--item">唱片編號</li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <!-- search end -->
+    </div>
+  </section>
+  <section class="music-panel">
+    <!-- 唱片內容 -->
+
+    <div class="music-detail text-color--white">
+      <div class="music-back"><i class="material-icons">clear</i></div>
+      <img src="Images/42015461716264232.jpg" width="100%" alt="">
+      <div class="music-basicinfo">
+        <small>唱片編號：9500 905</small>
+        <h5>巴布狄倫 / 世紀典藏【黑膠】2LP</h5>
+        <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+      </div>
+      <div class="music-artister slide" role="detail-slider">
+        <h6>黑膠名人<i class="pull-right material-icons">keyboard_arrow_down</i></h6>
+        <p>演唱者：Hal Chiu</p>
+        <p>指揮家：Hal Chiu</p>
+        <p>演奏家：安塔爾多拉蒂</p>
+        <p>樂團樂隊：皇家音樂廳管弦樂團</p>
+        <p>作曲家：理查·史特勞斯</p>
+        <p>聲樂家：理迪特里希·費雪迪斯考</p>
+      </div>
+      <div class="music-cover" role="detail-slider">
+        <h6>發行資訊<i class="pull-right material-icons">keyboard_arrow_down</i></h6>
+        <p>發行年份：1980</p>
+        <p>錄音年份：1980</p>
+        <p>音樂類型：古典音樂</p>
+        <p>古典樂體裁：古典(獨奏)</p>
+        <p>主奏樂器：小提琴</p>
+        <p>歌唱類型：小提琴</p>
+        <p>聲道：現場立體聲</p>
+        <p>唱片公司：飛利浦</p>
+        <p>時長：138</p>
+        <p>唱片包裝：單張</p>
+        <p>包裝數量：1</p>
+        <p>唱片轉速：45轉</p>
+      </div>
+      <div class="music-history" role="detail-slider">
+        <h6>黑膠簡介<i class="pull-right material-icons">keyboard_arrow_down</i></h6>
+        <p>
+        國立臺灣美術館於民國77年（1988年）開館，民國93年7月整建後重新開館。本館以視覺藝術為主導，典藏並研究臺灣現代與當代美術發展特色；除提供各項展覽</p>
+      </div>
+    </div>
+    <!-- 唱片內容 -->
+    <!-- 唱片列表資訊 -->
+    <div class="music-list">
+      <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span> <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+      <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+      <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+      <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+      <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+      <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+       <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+       <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+       <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+       <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+       <article class="music-item">
+          <div class="music-img">
+            <img src="Images/42015461716264232.jpg" width="100" height="100" alt="">
+          </div>
+
+        <div class="music-info text-color--white">
+          <h4><a href="">巴布狄倫 / 世紀典藏【黑膠】2LP</a></h4>
+          <p>Bob Dylan / The Essential Bob Dylan(Vinyl)</p>
+          
+          <p > </p>
+          <p class="info-footer"><span class="text-color--white">M-74892-749</span>  <span class="">類型：流行樂</span><br><span>發行年份：2016/07/19</span></p>
+        </div>
+      </article>
+
+    </div>
+    <!-- 唱片列表資訊 -->
+  </section>
+  <!-- <footer class="footer">
+    <div class="footer-text">&copy; 2016 顯經黑膠文創版權所有 <span class="hidden-md-down"><br>請使用 IE Edge、Firefox、Chrome 等瀏覽本網頁，獲取最佳效果。</span> </div>
+</footer> -->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+<script src="Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+<script>
+  function getPettyScroll (){
+    if (window.innerWidth > 543 ) {
+    $(".music-detail").mCustomScrollbar({
+          axis: "y",
+          theme: "dark"
+        });
+    }
+  }
+  $("[role='open-menu']").on('click',function(){
+    $('.search-area').toggleClass('active');
+    $('.mob-menu').toggleClass('active');
+  });
+  $(document)
+    .scroll(function () {
+      if ($(document).scrollTop() > 139) {
+          $('.music-panel').addClass('panel-fixed');
+      } else {
+          $('.music-panel').removeClass('panel-fixed');
+      }
+   })
+    .on('click','[role="detail-slider"]',function(){
+      $(this).toggleClass('slide');
+    })
+    .on('click','.music-item',function(){
+      $('.search-area').removeClass('active');
+      $('.music-detail').addClass('pop-view');
+    })
+    .on('click','.music-back',function(){
+      $('.search-area').removeClass('active');
+      $('.music-detail').removeClass('pop-view');
+    });
+
+     $(window).on("load",function(){
+        getPettyScroll ()
+    });
+
+    
+
+  
+
+</script>
+</body>
+</html>
