@@ -37,14 +37,6 @@
         padding: 15px;
         height: 100vh;
         max-height: 100vh;
-        overflow-y: scroll;
-        overflow: hidden;
-      }
-      .panel-fixed .music-detail {
-        top: 0;
-        position: fixed;
-        z-index: 1;
-        -webkit-overflow-scrolling: touch;
       }
       .panel-fixed .music-list {
         margin-left: 320px;
@@ -142,6 +134,7 @@
         .music-detail {
           position: fixed;
           display: none;
+          box-sizing: content-box;
           top: 0;
           left: 0;
           z-index: 99;
@@ -149,6 +142,8 @@
           padding: 0;
           background-color: black;
           padding-bottom: 80px;
+          overflow: scroll;
+          -webkit-overflow-scrolling: touch;
         } 
 
         .music-detail.pop-view {
@@ -422,9 +417,9 @@
     if (window.innerWidth > 600 ) {
       $(".music-detail").mCustomScrollbar({
           axis: "y",
-          theme: "dark"
+          theme: "light-thin"
         });
-    }
+    } 
   }
   $("[role='open-menu']").on('click',function(){
     $('.search-area').toggleClass('active');
@@ -451,10 +446,7 @@
     });
 
     $(window)
-      .on("load", getPettyScroll )
-      .on("resize", function (){
-        $('.music-detail').mCustomScrollbar("disable",true);
-      });
+      .on("load", getPettyScroll );
 
     
 
