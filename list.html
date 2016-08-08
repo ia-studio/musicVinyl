@@ -450,9 +450,9 @@
       $('.music-detail').removeClass('pop-view');
     });
 
-     $(window).on("load",function(){
-        getPettyScroll ()
-    });
+     $(window)
+      .on("load", getPettyScroll )
+      .on("resize", getPettyScroll );
 
     
 
