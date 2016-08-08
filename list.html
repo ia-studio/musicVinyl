@@ -419,8 +419,8 @@
 <script src="Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
   function getPettyScroll (){
-    if (window.innerWidth > 543 ) {
-    $(".music-detail").mCustomScrollbar({
+    if (window.innerWidth > 600 ) {
+      $(".music-detail").mCustomScrollbar({
           axis: "y",
           theme: "dark"
         });
@@ -450,9 +450,11 @@
       $('.music-detail').removeClass('pop-view');
     });
 
-     $(window)
+    $(window)
       .on("load", getPettyScroll )
-      .on("resize", getPettyScroll );
+      .on("resize", function (){
+        $('.music-detail').mCustomScrollbar("disable",true);
+      });
 
     
 
