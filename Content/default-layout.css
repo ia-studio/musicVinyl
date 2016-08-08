@@ -9,7 +9,7 @@ body {
         width: 100vw;
         height: 100vh;
         box-sizing: border-box;
-        background: url('../Images/runrunrun.gif')  center / cover;
+        background: url('../Images/runrunrun2.gif')  center / cover;
         position: fixed;
         left: 0;
         top: 0;
@@ -22,7 +22,7 @@ body {
         top: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,.5);
+        background: rgba(0,0,0,.6);
       }
       .index-background:before {
         content: "";

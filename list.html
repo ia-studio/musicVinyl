@@ -41,6 +41,12 @@
       .panel-fixed .music-list {
         margin-left: 320px;
       }
+      .panel-fixed .music-detail {
+        position: fixed;
+        z-index: 3;
+        top: 0;
+        height: 100vh;
+      }
       .music-list {
         padding: 15px;
          -webkit-flex: 1;
@@ -108,7 +114,7 @@
         border-top: 2px solid rgba(255,110,64,.6);
       }
       .music-history {
-        margin-bottom: 40px;
+        margin-bottom: 40vh;
       }
       .music-detail h6 {
         position: relative;
@@ -130,7 +136,7 @@
       [role*='detail-slider'] i {
         background-color: rgba(255,110,64,.6);
       }
-      @media screen and (max-width: 768px) { 
+      @media screen and (max-width: 1024px) { 
         .music-detail {
           position: fixed;
           display: none;
@@ -226,7 +232,7 @@
     <!-- 唱片內容 -->
 
     <div class="music-detail text-color--white">
-      <div class="music-back hidden-md-up"><i class="material-icons">clear</i></div>
+      <div class="music-back hidden-lg-up"><i class="material-icons">clear</i></div>
       <img src="Images/42015461716264232.jpg" width="100%" alt="">
       <div class="music-basicinfo">
         <small>唱片編號：9500 905</small>
@@ -413,8 +419,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
 <script src="Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
+(function(){
+  var searchArea = $('.search-area'),
+      musicPanel = $('.music-panel'),
+      musicDetail = $('.music-detail')
   function getPettyScroll (){
-    if (window.innerWidth > 600 ) {
+    if (window.innerWidth > 1024 ) {
       $(".music-detail").mCustomScrollbar({
           axis: "y",
           theme: "light-thin"
@@ -422,32 +432,36 @@
     } 
   }
   $("[role='open-menu']").on('click',function(){
-    $('.search-area').toggleClass('active');
+    searchArea.toggleClass('active');
     $('.mob-menu').toggleClass('active');
   });
   $(document)
     .scroll(function () {
       if ($(document).scrollTop() > 139) {
-          $('.music-panel').addClass('panel-fixed');
+          musicPanel.addClass('panel-fixed');
       } else {
-          $('.music-panel').removeClass('panel-fixed');
+          musicPanel.removeClass('panel-fixed');
       }
    })
     .on('click','[role="detail-slider"]',function(){
       $(this).toggleClass('slide');
     })
     .on('click','.music-item',function(){
-      $('.search-area').removeClass('active');
-      $('.music-detail').addClass('pop-view');
+      $('body').css('overflow','hidden');
+      searchArea.removeClass('active');
+      musicDetail.addClass('pop-view');
+      
     })
     .on('click','.music-back',function(){
-      $('.search-area').removeClass('active');
-      $('.music-detail').removeClass('pop-view');
+      $('body').css('overflow','auto');
+      searchArea.removeClass('active');
+      musicDetail.removeClass('pop-view').scrollTop(0);
+      
     });
 
-    $(window)
-      .on("load", getPettyScroll );
+    $(window).on("load", getPettyScroll);
 
+})();
     
 
   
