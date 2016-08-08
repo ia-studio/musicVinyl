@@ -140,7 +140,7 @@ body {
         }
        .search-area {
         display: none;
-        background-color: rgba(255,110,64,.9);
+        background-color: rgba(255,110,64,1);
         top: 0;
         right: auto;
         left: 200vw;

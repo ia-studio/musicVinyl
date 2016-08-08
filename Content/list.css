@@ -1,0 +1,184 @@
+.index-background:before {
+        border: none
+      }
+      /* list */
+      .search-top {
+        top: -20px;
+        bottom: auto;
+        transform: scale(.6)
+      }
+      .music-panel {
+        border-top: 1px solid rgba(255,255,255,.3);
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        -webkit-flex: 1;
+          flex: 1;
+      }
+      .music-detail {
+        width: 100%;
+        max-width: 320px;
+        padding: 15px;
+        height: 100vh;
+        max-height: 100vh;
+      }
+      .panel-fixed .music-list {
+        margin-left: 320px;
+      }
+      .panel-fixed .music-detail {
+        position: fixed;
+        z-index: 3;
+        top: 0;
+        height: 100vh;
+      }
+      .music-list {
+        padding: 15px;
+         -webkit-flex: 1;
+          flex: 1;
+      }
+      .music-item {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        border-left: 2px solid rgba(255,110,64,.7);
+        padding: 10px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        background-color: rgba(70,70,70,.5);
+        box-shadow: 0 0 10px rgba(0,0,0,.7);
+        -webkit-transition-property: transform, background-color;
+        -o-transition-property: transform, background-color;
+        transition-property: transform, background-color;
+        transition-duration: .3s;
+      }
+      .music-item:hover {
+        border-color: rgba(255,110,64,.9);
+        background-color: rgba(70,70,70,.7);
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(0,0,0,.1);
+      }
+      .music-item:hover + article {
+        transform: scale(1.01);
+        box-shadow: 0 0 10px rgba(0,0,0,.7);
+      }
+      .music-img {
+        width: 100px;
+        font-size: .75em;
+        line-height: 1.8em;
+      }
+      .music-info {
+        margin-left: 20px;
+        position: relative;
+        -webkit-flex: 1;
+          flex: 1;
+      }
+      .music-info a{
+        color: rgba(255,110,64,1);
+      }
+      .music-info a:hover {
+        color: rgba(255,110,64,.6);
+      }
+      .text-color--white {
+        color: rgba(255,255,255,.7);
+      }
+      .info-footer {
+        width: 100%;
+      }
+      .pull-right {
+        float: right;
+      }
+      .music-artister,
+      .music-cover,
+      .music-history {
+        height: 3em;
+        margin-bottom: 20px;
+        overflow: hidden;
+        border-top: 2px solid rgba(255,110,64,.6);
+      }
+      .music-history {
+        padding-bottom: 40vh;
+      }
+      .music-detail h6 {
+        position: relative;
+        line-height: 3em;
+        cursor: pointer;
+      }
+      .music-detail h6:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 10px;
+        height: 1px;
+        background-color: rgba(255,255,255,.4);
+      }
+      .music-detail .slide {
+        height: auto;
+      }
+      [role*='detail-slider'] i {
+        background-color: rgba(255,110,64,.6);
+      }
+      .music-back {
+        display: none;
+      }
+      @media screen and (max-width: 1030px) { 
+        .music-detail {
+          position: fixed;
+          display: none;
+          box-sizing: content-box;
+          top: 0;
+          left: 0;
+          z-index: 99;
+          max-width: 100%;
+          padding: 0;
+          background-color: black;
+          padding-bottom: 80px;
+          overflow: scroll;
+          -webkit-overflow-scrolling: touch;
+        } 
+
+        .music-detail.pop-view {
+          display: block;
+        }
+        .music-basicinfo,
+        .music-artister,
+        .music-cover,
+        .music-history {
+          margin: 0 15px
+        }
+        .music-list {
+          margin-left: 0 !important;
+        } 
+        .music-back {
+          display: block;
+        }
+        .music-back i{
+          position: fixed;
+          right: 0;
+          top: 0;
+          padding: 10px;
+          font-size: 2em;
+          color: rgba(0,0,0,.7);
+          background-color: rgb(255,110,64);
+          cursor: pointer;
+        }
+        .music-item {
+          display: block;
+          height: auto;
+        }
+        .music-img{
+          width: 100%;
+          margin-bottom: 15px;
+        }
+        .music-info {
+          width: 100%;
+          margin-left: 0;
+        }
+        .info-footer {
+          position: static;
+        }
+      }
