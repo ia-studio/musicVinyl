@@ -329,6 +329,9 @@ body {
 .maT15 {
   margin-top: 15px;
 }
+.header-gap {
+  margin-top: 150px;
+}
 .download-button {
   display: inline-block;
   width: 200px;
