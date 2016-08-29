@@ -13,7 +13,7 @@ body {
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
-    background: url('../Images/runrunrun2.gif') center / cover;
+    background: url('../Images/giphy-3.gif') center / cover;
     position: fixed;
     left: 0;
     top: 0;
@@ -344,6 +344,20 @@ body {
   text-decoration: none;
   color : black;
   background-color: rgb(255, 110, 64);
+}
+.goTop {
+  position: fixed;
+  bottom: 50px;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  color: black;
+  text-align: center;
+  line-height: 50px;
+  font-size: 2em;
+  cursor: pointer;
+  background-color: rgb(255, 110, 64);
+
 }
 @media screen and (max-width: 544px) {
     .index-background:before {

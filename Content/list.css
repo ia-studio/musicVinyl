@@ -100,7 +100,7 @@
         border-top: 2px solid rgba(255,110,64,.6);
       }
       .music-history {
-        padding-bottom: 40vh;
+        margin-bottom: 40vh;
       }
       .music-detail h6 {
         position: relative;
@@ -125,6 +125,7 @@
       .music-back {
         display: none;
       }
+      
       @media screen and (max-width: 1030px) { 
         .music-detail {
           position: fixed;
