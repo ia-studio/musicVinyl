@@ -454,6 +454,8 @@ body {
     .border-top-orage {
       border: none;
     }
+}
+@media screen and (max-width: 768px) {
   .about {
     display: block;
     height: auto;
@@ -477,6 +479,13 @@ body {
   }
   .rent .col-md-4 {
     padding-bottom: 20px;
+  }
+  .contact .col-md-2,
+  .contact .col-md-8 {
+    width: 100%;
+  }
+  .contact .offset-md-1 {
+    margin-left: 0;
   }
   .contact-info {
     width: 100%;  
